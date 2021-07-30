@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+  bloopyboi:
+    container_name: bot
+    build: .
+    volumes:
+      - ./app:/app
+    ports:
+      - "8000:8000"
+    environment:
+      DISCORD_BOT_TOKEN: $DISCORD_BOT_TOKEN
+    secrets:
+      - discord_bot_token
+
+secrets:
+  discord_bot_token:
+    file: ./secrets/bloopyboi_token
