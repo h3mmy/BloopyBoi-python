@@ -12,7 +12,7 @@ backup_link = "https://generated.inspirobot.me/a/12PYMWaBPB.jpg"
 
 intents = discord.Intents.default()
 
-bot = commands.Bot(command_prefix='?', description=description, intents=intents)
+bot = commands.Bot(command_prefix='!', description=description, intents=intents)
 
 @bot.event
 async def on_ready():
@@ -30,14 +30,15 @@ async def inspire(ctx):
     """Pull an image from inspiroBot allegedly"""
     inspiroBot_url = do_get_inspiro()
     msg = discord.Embed()
-    msg.set_image(inspiroBot_url)
-    ctx.send(embed=msg)
+    msg.set_image(url=inspiroBot_url)
+    await ctx.send(embed=msg)
 
 def do_get_inspiro():
     """Do a GET to fetch link"""
     res = requests.get(inspiroBot_api_url)
+    print(res.text)
     if res.status_code == 200:
-        return res.content
+        return res.text
     else:
         return backup_link
 
