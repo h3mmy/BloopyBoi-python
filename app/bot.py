@@ -1,22 +1,45 @@
 import discord
 import os
+import requests
 
 from discord import message
+from discord.ext import commands
+from discord.flags import Intents
 
-client = discord.Client()
+description = '''The BloopyBoi, one of bloop.'''
+inspiroBot_api_url="https://inspirobot.me/api?generate=true"
+backup_link = "https://generated.inspirobot.me/a/12PYMWaBPB.jpg"
 
-@client.event
+intents = discord.Intents.default()
+
+bot = commands.Bot(command_prefix='?', description=description, intents=intents)
+
+@bot.event
 async def on_ready():
-    print('We have logged in as {0.user}'.format(client))
-    print(client.get_all_channels)
+    """Announces self to std.out"""
+    print('We have logged in as {0} {1}'.format(bot.user.name, bot.user.id))
 
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
+@bot.command()
+async def hello(ctx):
+    """Says hello, prints ctx maybe"""
+    if ctx:
+        await ctx.send('Hello to you as well humanoid! This is an experiment. The context is {0}'.format(ctx))
 
-    if message.content.startswith('$hello'):
-        await message.channel.send('Hello!')
+@bot.command()
+async def inspire(ctx):
+    """Pull an image from inspiroBot allegedly"""
+    inspiroBot_url = do_get_inspiro()
+    msg = discord.Embed()
+    msg.set_image(inspiroBot_url)
+    ctx.send(embed=msg)
+
+def do_get_inspiro():
+    """Do a GET to fetch link"""
+    res = requests.get(inspiroBot_api_url)
+    if res.status_code == 200:
+        return res.content
+    else:
+        return backup_link
 
 
-client.run(os.getenv('DISCORD_BOT_TOKEN'))
+bot.run(os.getenv('DISCORD_BOT_TOKEN'))
