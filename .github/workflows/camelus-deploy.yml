@@ -35,4 +35,5 @@ jobs:
         
     - name: Rsync repo
       run: |
-        rsync -aPz . staging:${{ secrets.REMOTE_BLOOPYBOI_DIR }}
+        pwd
+        rsync -aPz ./ staging:${{ secrets.REMOTE_BLOOPYBOI_DIR }}
