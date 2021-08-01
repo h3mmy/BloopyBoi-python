@@ -27,6 +27,8 @@ jobs:
         key: ${{ secrets.BLOOPNET_SSH_KEY }}
         passphrase: ${{ secrets.BLOOPNET_SSH_KEY_PASSPHRASE }}
         port: ${{ secrets.BLOOPNET_SSH_PORT }}
+        fingerprint: ${{ secrets.BLOOPNET_HOST_ECDSA_FINGERPRINT }}
+        debug: true
         rm: true
         source: "."
         target: "${{ secrets.REMOTE_BLOOPYBOI_DIR }}"
