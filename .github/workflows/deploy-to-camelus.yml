@@ -24,10 +24,14 @@ jobs:
         mkdir -p ~/.ssh
         echo "${{ secrets.BLOOPNET_SSH_KEY }}" > ~/.ssh/staging.key
         chmod 600 ~/.ssh/staging.key
-        export SSH_ASKPASS="${{ secrets.BLOOPNET_SSH_KEY_PASSPHRASE }}"
-        export SSH_ASKPASS_REQUIRE=force
+        cat >>dummy-pass.sh <<END
+        #!/bin/bash
+        read SECRET
+        echo $SECRET
+        END
+        export SSH_ASKPASS="dummy-pass.sh"
         eval `ssh-agent -s`
-        ssh-add ~/.ssh/staging.key
+        ssh-add ~/.ssh/staging.key <<< ${{ secrets.BLOOPNET_SSH_KEY_PASSPHRASE }}
         echo "${{ secrets.BLOOPNET_HOST_KEY_PUB }}" > ~/.ssh/known_hosts
         cat >>~/.ssh/config <<END
         Host staging
