@@ -30,6 +30,6 @@ jobs:
           Port ${{ secrets.BLOOPNET_SSH_PORT }}
         END
         
-    - name: SSH into server
+    - name: Rsync repo
       run: |
-        ssh -vvv staging whoami
+        rsync -aPz . staging:${{ secrets.REMOTE_BLOOPYBOI_DIR }}
