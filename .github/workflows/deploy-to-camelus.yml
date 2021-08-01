@@ -25,6 +25,7 @@ jobs:
         echo "${{ secrets.BLOOPNET_SSH_KEY }}" > ~/.ssh/staging.key
         chmod 600 ~/.ssh/staging.key
         export SSH_ASKPASS="${{ secrets.BLOOPNET_SSH_KEY_PASSPHRASE }}"
+        export SSH_ASKPASS_REQUIRE=force
         eval `ssh-agent -s`
         ssh-add ~/.ssh/staging.key
         echo "${{ secrets.BLOOPNET_HOST_KEY_PUB }}" > ~/.ssh/known_hosts
