@@ -43,4 +43,4 @@ jobs:
         
     - name: SSH into server
       run: |
-        ssh -vvv staging whoami
+        ssh -o StrictHostKeyChecking=no -vvvv staging whoami
