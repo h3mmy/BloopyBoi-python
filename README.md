@@ -1,5 +1,4 @@
-<<<<<<< HEAD
 # BloopyBoi
-=======
-# Quarks
->>>>>>> c06c7a2... Initial commit
+### A BloopNet Project
+
+- Working on fixing workflows
