@@ -1,14 +1,11 @@
 # This is a basic workflow that is manually triggered
 
-name: Deploy to Camelus via SSH
+name: Test Camelus SSH
 
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
 on:
   workflow_dispatch:
-  push:
-    branches:
-    - main
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
