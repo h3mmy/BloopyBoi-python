@@ -26,7 +26,7 @@ jobs:
         username: ${{ secrets.BLOOPNET_GIT_USER }}
         key: ${{ secrets.BLOOPNET_SSH_KEY }}
         port: ${{ secrets.BLOOPNET_SSH_PORT }}
-        fingerprint: ${{ secrets.BLOOPNET_HOST_ED25519_FINGERPRINT }}
+        fingerprint: ${{ secrets.BLOOPNET_HOST_RSA_FINGERPRINT }}
         rm: true
         source: "."
         target: "${{ secrets.REMOTE_BLOOPYBOI_DIR }}"
