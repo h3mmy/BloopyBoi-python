@@ -19,16 +19,23 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Copying files and artifacts via SSH
-    - name: Copying files to server
-      uses: appleboy/scp-action@master
-      with:
-        host: ${{ secrets.BLOOPNET_HOST_NAME }}
-        username: ${{ secrets.BLOOPNET_GIT_USER }}
-        key: ${{ secrets.BLOOPNET_SSH_KEY }}
-        passphrase: ${{ secrets.BLOOPNET_SSH_KEY_PASSPHRASE }}
-        port: ${{ secrets.BLOOPNET_SSH_PORT }}
-#         fingerprint: ${{ secrets.BLOOPNET_HOST_ECDSA_FINGERPRINT }}
-        debug: true
-        rm: true
-        source: "."
-        target: "${{ secrets.REMOTE_BLOOPYBOI_DIR }}"
+    - name: Configure SSH
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.BLOOPNET_SSH_KEY }}" > ~/.ssh/staging.key
+        chmod 600 ~/.ssh/staging.key
+        ssh-add ~/.ssh/staging.key
+        echo "${{ secrets.BLOOPNET_HOST_KEY_PUB }}" > ~/.ssh/known_hosts
+        cat >>~/.ssh/config <<END
+        Host staging
+          HostName ${{ secrets.BLOOPNET_HOST_NAME }}
+          User ${{ secrets.BLOOPNET_GIT_USER }}
+          IdentityFile ~/.ssh/staging.key
+          Port ${{ secrets.BLOOPNET_SSH_PORT }}
+        END
+      env:
+        SSH_ASKPASS: ${{ secrets.BLOOPNET_SSH_KEY_PASSPHRASE }}
+        
+    - name: SSH into server
+      run: |
+        ssh -vvv staging whoami
