@@ -46,4 +46,4 @@ jobs:
 
     - name: Run remote docker chain
       run: |
-        ssh staging 'cd ${{ secrets.MINI_BLOOP_REMOTE_DIR }} && docker-compose --force-recreate up -d && docker prune'
+        ssh staging 'cd ${{ secrets.MINI_BLOOP_REMOTE_DIR }} && sudo docker-compose --force-recreate up -d && sudo docker prune'
