@@ -4,3 +4,4 @@ Include/*
 pyvenv.cfg
 secrets/*
 .env
+.vscode/*
