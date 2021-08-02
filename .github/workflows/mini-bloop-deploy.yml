@@ -25,12 +25,13 @@ jobs:
         ref: main
         token: ${{ secrets.DEPLOY_PAT }}
     # Copying files and artifacts via SSH
-    - name: Configure SSH
+    - name: Configure SSH and create staging files
       run: |
         mkdir -p ~/.ssh
         echo "${{ secrets.MINI_BLOOP_SSH_KEY }}" > ~/.ssh/staging.key
         chmod 600 ~/.ssh/staging.key
         echo "${{ secrets.MINI_BLOOP_HOST_KEY_PUB }}" > ~/.ssh/known_hosts
+        echo "DISCORD_BOT_TOKEN=${{ secrets.DISCORD_BOT_TOKEN }}" > .env
         cat >>~/.ssh/config <<END
         Host staging
           HostName ${{ secrets.MINI_BLOOP_HOST_NAME }}
@@ -41,3 +42,7 @@ jobs:
     - name: Rsync repo
       run: |
         rsync -aPz ./ staging:${{ secrets.MINI_BLOOP_REMOTE_DIR }}
+
+    - name: Run remote docker chain
+      run: |
+        ssh staging 'cd ${{ secrets.MINI_BLOOP_REMOTE_DIR }} && docker-compose --force-recreate up -d && docker prune'
