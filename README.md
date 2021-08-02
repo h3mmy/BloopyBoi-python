@@ -4,5 +4,6 @@
 
 - Project initialized.
 - Currently only pulls inspirobot images
+- Gone public with visibility
 
 
