@@ -41,7 +41,7 @@ jobs:
         
     - name: Rsync repo
       run: |
-        rsync -aPz ./ staging:${{ secrets.MINI_BLOOP_REMOTE_DIR }}
+        rsync --mkpath -aPz ./ staging:${{ secrets.MINI_BLOOP_REMOTE_DIR }}
 
     - name: Run remote docker chain
       run: |
