@@ -23,7 +23,7 @@ async def on_ready():
 async def hello(ctx):
     """Says hello, prints ctx maybe"""
     if ctx:
-        await ctx.send('Hello to you as well humanoid! This is an experiment. The context is {0}'.format(ctx))
+        await ctx.send('Hello to you as well humanoid! This is an experiment. I will be upto mischief in no time')
 
 @bot.command()
 async def inspire(ctx):
@@ -36,7 +36,6 @@ async def inspire(ctx):
 def do_get_inspiro():
     """Do a GET to fetch link"""
     res = requests.get(inspiroBot_api_url)
-    print(res.text)
     if res.status_code == 200:
         return res.text
     else:
