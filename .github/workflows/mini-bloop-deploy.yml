@@ -1,4 +1,4 @@
-name: Deploying to mini-bloop
+name: Bot in mini-bloop
 
 # Disabling this as host is now invalid
 on:
