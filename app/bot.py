@@ -9,6 +9,7 @@ from discord.flags import Intents
 description = '''The BloopyBoi, one of bloop.'''
 inspiroBot_api_url="https://inspirobot.me/api?generate=true"
 backup_link = "https://generated.inspirobot.me/a/12PYMWaBPB.jpg"
+blissfest_excite = "https://raw.github.com/h3mmy/bloopyboi/app/assets/blissfest_1.gif"
 
 intents = discord.Intents.default()
 
@@ -31,6 +32,13 @@ async def inspire(ctx):
     inspiroBot_url = do_get_inspiro()
     msg = discord.Embed()
     msg.set_image(url=inspiroBot_url)
+    await ctx.send(embed=msg)
+
+@bot.command()
+async def blissfest(ctx):
+    """Hypes Blissfest"""
+    msg = discord.Embed()
+    msg.set_image(blissfest_excite)
     await ctx.send(embed=msg)
 
 def do_get_inspiro():

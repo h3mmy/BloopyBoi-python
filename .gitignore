@@ -3,5 +3,41 @@ Scripts/*
 Include/*
 pyvenv.cfg
 secrets/*
+env/*
 .env
 .vscode/*
+.direnv/*
+
+-- Go Stuff
+go-app/*
+# Bot configuration
+google-assistant-token.json
+config.json
+
+# Bot save states
+state/
+
+# Bot temporaries
+.update
+.restart
+crash.txt
+stacktrace.txt
+.firstrun
+
+# Output executables
+*.exe
+*.app
+*.old
+
+# Most probable output executables for Linux
+clinet
+
+# Log files
+*.log
+
+# Supervise
+run
+supervise/
+
+# OS leftovers
+desktop.ini
