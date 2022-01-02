@@ -1,17 +1,15 @@
-import discord
+import disnake
 import os
 import requests
 
-from discord import message
-from discord.ext import commands
-from discord.flags import Intents
+from disnake import message
+from disnake.ext import commands
+from disnake.flags import Intents
 
 description = '''The BloopyBoi, one of bloop.'''
-inspiroBot_api_url="https://inspirobot.me/api?generate=true"
-backup_link = "https://generated.inspirobot.me/a/12PYMWaBPB.jpg"
 blissfest_1 = "https://github.com/h3mmy/BloopyBoi/raw/main/app/assets/blissfest_1.gif"
 
-intents = discord.Intents.default()
+intents = disnake.Intents.default()
 
 bot = commands.Bot(command_prefix='!', description=description, intents=intents)
 
@@ -27,28 +25,13 @@ async def hello(ctx):
         await ctx.send('Hello to you as well humanoid! This is an experiment. I will be upto mischief in no time')
 
 @bot.command()
-async def inspire(ctx):
-    """Pull an image from inspiroBot allegedly"""
-    inspiroBot_url = do_get_inspiro()
-    msg = discord.Embed()
-    msg.set_image(url=inspiroBot_url)
-    await ctx.send(embed=msg)
-
-@bot.command()
 async def blissfest(ctx):
     """Hypes Blissfest"""
     blissfest_excite_url=blissfest_1
-    msg = discord.Embed()
+    msg = disnake.Embed()
     msg.set_image(url=blissfest_excite_url)
     await ctx.send(embed=msg)
 
-def do_get_inspiro():
-    """Do a GET to fetch link"""
-    res = requests.get(inspiroBot_api_url)
-    if res.status_code == 200:
-        return res.text
-    else:
-        return backup_link
+bot.load_extension("cogs.inspire")
 
-
-bot.run(os.getenv('DISCORD_BOT_TOKEN'))
+bot.run(os.getenv('Disnake_BOT_TOKEN'))
