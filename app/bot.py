@@ -9,7 +9,7 @@ from discord.flags import Intents
 description = '''The BloopyBoi, one of bloop.'''
 inspiroBot_api_url="https://inspirobot.me/api?generate=true"
 backup_link = "https://generated.inspirobot.me/a/12PYMWaBPB.jpg"
-blissfest_excite = "https://raw.github.com/h3mmy/bloopyboi/app/assets/blissfest_1.gif"
+blissfest_excite = "https://github.com/h3mmy/BloopyBoi/raw/main/app/assets/blissfest_1.gif"
 
 intents = discord.Intents.default()
 
