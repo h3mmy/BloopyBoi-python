@@ -1,5 +1,5 @@
 ---
-name: Deploy Keycloak Theme to GHCR
+name: Deploy BloopyBoi to GHCR
 
 # Run workflow on tags starting with v (eg. v2, v1.2.0)
 on:
@@ -12,7 +12,7 @@ on:
 
 env:
   registry: ghcr.io
-  imageName: bloopnet_theme
+  imageName: bloopyboi
   dockerfile_path: ./Dockerfile
 
 jobs:
