@@ -7,8 +7,10 @@ env/*
 .env
 .vscode/*
 .direnv/*
+*pycache*/*
 
--- Go Stuff
+
+#-- Go Stuff
 go-app/*
 # Bot configuration
 google-assistant-token.json

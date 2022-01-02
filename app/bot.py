@@ -34,4 +34,4 @@ async def blissfest(ctx):
 
 bot.load_extension("cogs.inspire")
 
-bot.run(os.getenv('Disnake_BOT_TOKEN'))
+bot.run(os.getenv('DISCORD_BOT_TOKEN'))
