@@ -8,6 +8,7 @@ on:
       - main
     paths:
       - app/*
+      - !app/.pylintrc
       - Dockerfile
       - docker-compose.yaml
 
