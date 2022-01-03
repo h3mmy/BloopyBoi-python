@@ -3,9 +3,13 @@ name: Bot in mini-bloop
 # Disabling this as host is now invalid
 on:
   workflow_dispatch:
-  # push:
-  #   branches:
-  #   - main
+  push:
+    branches:
+      - main
+    paths:
+      - app/*
+      - Dockerfile
+      - docker-compose.yaml
 
 jobs:
   deploy_to_server:
@@ -34,11 +38,14 @@ jobs:
           IdentityFile ~/.ssh/staging.key
         END
 
-    - name: Rsync repo
+      name: Update agent copy of repo
       run: |
-        ssh staging 'mkdir -p ${{ secrets.MINI_BLOOP_REMOTE_DIR }}'
-        rsync -aPz ./ staging:${{ secrets.MINI_BLOOP_REMOTE_DIR }}
+        ssh staging 'cd ${{ secrets.MINI_BLOOP_REMOTE_DIR }} && git pull'
+    # - name: Rsync repo
+    #   run: |
+    #     ssh staging 'mkdir -p ${{ secrets.MINI_BLOOP_REMOTE_DIR }}'
+    #     rsync -aPz ./ staging:${{ secrets.MINI_BLOOP_REMOTE_DIR }}
 
     - name: Run remote docker chain
       run: |
-        ssh staging 'cd ${{ secrets.MINI_BLOOP_REMOTE_DIR }} && sudo docker-compose up --force-recreate -d && sudo docker container prune -f --filter "until=24h"'
+        ssh staging 'cd ${{ secrets.MINI_BLOOP_REMOTE_DIR }} && sudo docker-compose pull && sudo docker-compose up --force-recreate -d && sudo docker container prune -f --filter "until=24h"'
