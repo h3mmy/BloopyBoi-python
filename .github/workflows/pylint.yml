@@ -1,8 +1,9 @@
 name: Pylint
 
 on:
-  - push:
-      paths: ./app/*
+  workflow_dispatch:
+  push:
+    - paths: ./app/*
    
 
 jobs:
