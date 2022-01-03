@@ -1,23 +1,23 @@
-
+"""Module docstring"""
 import disnake
 from disnake.ext import commands
 import requests
 
 
 class InspireCommand(commands.Cog):
-    """This will be for a ping command."""
+    """This will be for the inspire command."""
 
-    def __init__(self, bot: commands.Bot, inspiroBot_api_url):
+    def __init__(self, bot: commands.Bot, inspirobot_api_url):
         self.bot = bot
-        self.api_url = inspiroBot_api_url
+        self.api_url = inspirobot_api_url
         self.backup_link = "https://generated.inspirobot.me/a/12PYMWaBPB.jpg"
 
     @commands.command()
     async def inspire(self, ctx: commands.Context):
         """Pull an image from inspiroBot allegedly"""
-        inspiroBot_url = self.do_get_inspiro()
+        inspirobot_url = self.do_get_inspiro()
         msg = disnake.Embed()
-        msg.set_image(url=inspiroBot_url)
+        msg.set_image(url=inspirobot_url)
         await ctx.send(embed=msg)
 
     def do_get_inspiro(self):
@@ -29,5 +29,6 @@ class InspireCommand(commands.Cog):
             return self.backup_link
 
 def setup(bot: commands.Bot):
+    """Sets up Cog"""
     api_url="https://inspirobot.me/api?generate=true"
     bot.add_cog(InspireCommand(bot, api_url))
