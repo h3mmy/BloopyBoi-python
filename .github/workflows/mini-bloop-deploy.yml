@@ -38,7 +38,7 @@ jobs:
           IdentityFile ~/.ssh/staging.key
         END
 
-      name: Update agent copy of repo
+    - name: Update agent copy of repo
       run: |
         ssh staging 'cd ${{ secrets.MINI_BLOOP_REMOTE_DIR }} && git pull'
     # - name: Rsync repo
