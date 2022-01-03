@@ -1,10 +1,7 @@
-import disnake
 import os
-import requests
+import disnake
 
-from disnake import message
 from disnake.ext import commands
-from disnake.flags import Intents
 
 description = '''The BloopyBoi, one of bloop.'''
 
