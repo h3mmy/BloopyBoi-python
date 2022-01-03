@@ -4,11 +4,13 @@ name: Deploy BloopyBoi to GHCR
 # Run workflow on tags starting with v (eg. v2, v1.2.0)
 on:
   workflow_dispatch:
+  workflow_call:
   push:
     branches:
       - main
     paths:
       - app/*
+      - !app/.pylintrc
 
 env:
   registry: ghcr.io
