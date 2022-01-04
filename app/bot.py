@@ -22,6 +22,6 @@ async def hello(ctx):
         await ctx.send('Hello to you as well humanoid! This is an experiment.')
 
 bot.load_extension("cogs.inspire")
-bot.load_extension("cog.blissfest")
+bot.load_extension("cogs.blissfest")
 
 bot.run(os.getenv('DISCORD_BOT_TOKEN'))
