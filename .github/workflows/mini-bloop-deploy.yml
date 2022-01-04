@@ -3,14 +3,8 @@ name: Bot Deployment
 # Disabling this as host is now invalid
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - app/*
-      - !app/.pylintrc
-      - Dockerfile
-      - docker-compose.yaml
+  # Need to rewrite for reusability
+  workflow_call:
 
 jobs:
   deploy_to_server:
