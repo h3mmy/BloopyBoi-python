@@ -5,12 +5,9 @@ name: Deploy BloopyBoi to GHCR
 on:
   workflow_dispatch:
   workflow_call:
-  push:
-    branches:
-      - main
-    paths:
-      - app/*
-      - !app/.pylintrc
+  release:
+    types:
+      - published
 
 env:
   registry: ghcr.io
