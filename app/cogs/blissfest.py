@@ -1,7 +1,9 @@
 """Module docstring"""
+from datetime import date
 import disnake
 from disnake.ext import commands
 
+BLISSFEST_DATE = date(2022,7,8)
 
 class BlissfestCommand(commands.Cog):
     """This will be for the blissfest command."""
@@ -16,6 +18,16 @@ class BlissfestCommand(commands.Cog):
         blissfest_excite_url = self.excite_url
         msg = disnake.Embed()
         msg.set_image(url=blissfest_excite_url)
+        await ctx.send(embed=msg)
+
+    @commands.command()
+    async def bliss(self, ctx: commands.Context):
+        """Returns days left to BLISSFEST_DATE"""
+        current_date = date.today()
+        days_left = BLISSFEST_DATE-current_date
+        msg = disnake.Embed(
+            title="Blissfest!",
+            description=f"{days_left.days} Days Left!")
         await ctx.send(embed=msg)
 
 def setup(bot: commands.Bot):
