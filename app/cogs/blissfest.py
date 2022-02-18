@@ -33,11 +33,6 @@ class BlissfestCommand(commands.Cog):
             title="🏕 Blissfest! 🎶🎼",
             description=f"Only {days_left.days} Days Left!")
 
-    @commands.slash_command()
-    async def blissme(self, inter: disnake.CommandInteraction, user: disnake.User):
-        await inter.response.send_message(f"Goddess Bliss You {user.display_name}")
-
-
 def setup(bot: commands.Bot):
     """Sets up Cog"""
     api_url="https://github.com/h3mmy/BloopyBoi/raw/main/app/assets/blissfest_1.gif"
