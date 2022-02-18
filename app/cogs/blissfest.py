@@ -26,8 +26,8 @@ class BlissfestCommand(commands.Cog):
         current_date = date.today()
         days_left = BLISSFEST_DATE-current_date
         msg = disnake.Embed(
-            title="Blissfest!",
-            description=f"{days_left.days} Days Left!")
+            title="🏕 Blissfest! 🎶🎼",
+            description=f"Only {days_left.days} Days Left!")
         await ctx.send(embed=msg)
 
 def setup(bot: commands.Bot):
