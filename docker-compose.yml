@@ -2,8 +2,10 @@ version: '3.7'
 
 services:
   bloopyboi:
+    image: ghcr.io/h3mmy/bloopyboi
+    tag: latest
     container_name: bot
-    build: .
+    # build: .
     volumes:
       - ./app:/app
     ports:
