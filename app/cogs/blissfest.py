@@ -27,7 +27,7 @@ class BlissfestCommand(commands.Cog):
         msg = self.build_countdown_msg(days_left)
         await ctx.send(embed=msg)
 
-    def new_method(self, days_left):
+    def build_countdwn_msg(self, days_left):
         """Builds the embedded countdown message"""
         return disnake.Embed(
             title="🏕 Blissfest! 🎶🎼",
