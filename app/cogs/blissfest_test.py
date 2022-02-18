@@ -2,7 +2,7 @@
 import unittest
 from disnake.ext import commands
 
-from app.cogs import BlissfestCommand
+import blissfest
 
 
 class BlissfestCommandTest(unittest.TestCase):
@@ -10,7 +10,7 @@ class BlissfestCommandTest(unittest.TestCase):
 
     def setUp(self) -> None:
         test_bot = commands.Bot()
-        self.test_cog = BlissfestCommand(bot=test_bot)
+        self.test_cog = blissfest.BlissfestCommand(bot=test_bot, blissfest_excite_url="test_url")
 
     def test_constructs_cog(self):
         """Unit Tests"""
