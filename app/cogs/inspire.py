@@ -25,8 +25,7 @@ class InspireCommand(commands.Cog):
         res = requests.get(self.api_url)
         if res.status_code == 200:
             return res.text
-        else:
-            return self.backup_link
+        return self.backup_link
 
 def setup(bot: commands.Bot):
     """Sets up Cog"""

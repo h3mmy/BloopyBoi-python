@@ -23,12 +23,20 @@ class BlissfestCommand(commands.Cog):
     @commands.command()
     async def bliss(self, ctx: commands.Context):
         """Returns days left to BLISSFEST_DATE"""
-        current_date = date.today()
-        days_left = BLISSFEST_DATE-current_date
-        msg = disnake.Embed(
+        days_left = BLISSFEST_DATE-date.today()
+        msg = self.build_countdown_msg(days_left)
+        await ctx.send(embed=msg)
+
+    def new_method(self, days_left):
+        """Builds the embedded countdown message"""
+        return disnake.Embed(
             title="🏕 Blissfest! 🎶🎼",
             description=f"Only {days_left.days} Days Left!")
-        await ctx.send(embed=msg)
+
+    @commands.slash_command()
+    async def blissme(self, inter: disnake.CommandInteraction, user: disnake.User):
+        await inter.response.send_message(f"Goddess Bliss You {user.display_name}")
+
 
 def setup(bot: commands.Bot):
     """Sets up Cog"""

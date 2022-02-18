@@ -1,0 +1,26 @@
+---
+name: Deploy BloopyBoi to Neutrino
+
+# Run workflow on tags starting with v (eg. v2, v1.2.0)
+on:
+  workflow_dispatch:
+  # push:
+  #   branches:
+  #     - main
+
+env:
+  registry: ghcr.io
+  imageName: bloopyboi
+
+jobs:
+  Run PyLint:
+    uses: h3mmy/bloopyboi/.github/workflows/pylint.yml@main
+
+  Run Unit Tests:
+    uses: h3mmy/bloopyboi/.github/workflows/python-app.yml@main
+
+  Build and Deploy Image:
+    uses: h3mmy/bloopyboi/.github/workflows/deploy-image.yaml@main
+
+  Deploy to Node:
+    environment: production
