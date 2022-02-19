@@ -18,11 +18,12 @@ jobs:
 
   Deploy to Node:
     environment: quarkynet
-    uses: h3mmy/bloopyboi/.github/workflows/remote-docker-up.yaml@main
-    with:
-      username: ${{ secrets.NEUTRINO_USER_NAME }}
-      remoteDir: ${{ secrets.DOCKER_REMOTE_DIR }}
-      remoteHost: ${{ secrets.HOST_0_NAME }}
-    secrets:
-      envPAT: ${{ secrets.GITHUB_TOKEN }}
-      remoteSshKey: ${{ secrets.NEUTRINO_SSH_KEY }}
+    steps:
+      - uses: h3mmy/bloopyboi/.github/workflows/remote-docker-up.yaml@main
+        with:
+          username: ${{ secrets.NEUTRINO_USER_NAME }}
+          remoteDir: ${{ secrets.DOCKER_REMOTE_DIR }}
+          remoteHost: ${{ secrets.HOST_0_NAME }}
+        secrets:
+          envPAT: ${{ secrets.GITHUB_TOKEN }}
+          remoteSshKey: ${{ secrets.NEUTRINO_SSH_KEY }}
