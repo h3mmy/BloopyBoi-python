@@ -9,8 +9,6 @@ on:
   #     - main
 
 jobs:
-  Run PyLint:
-    uses: h3mmy/bloopyboi/.github/workflows/pylint.yml@main
 
   Run Unit Tests:
     uses: h3mmy/bloopyboi/.github/workflows/python-app.yml@main

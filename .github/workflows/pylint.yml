@@ -4,9 +4,9 @@ name: Pylint
 on:
   workflow_dispatch:
   push:
-    paths: 
+    paths:
       - './app/*'
-   
+
 
 jobs:
   build:
