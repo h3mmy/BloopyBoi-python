@@ -19,9 +19,11 @@ jobs:
     uses: h3mmy/bloopyboi/.github/workflows/python-app.yml@main
 
   build-and-deploy-image:
+    needs: run-unit-tests
     uses: h3mmy/bloopyboi/.github/workflows/deploy-image.yaml@main
 
-  deploy-to-node:
+  deployment:
+    needs: build-and-deploy-image
     uses: h3mmy/bloopyboi/.github/workflows/remote-docker-up.yaml@main
     with:
       environment: quarkynet
