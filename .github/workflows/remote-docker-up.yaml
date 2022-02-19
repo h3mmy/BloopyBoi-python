@@ -38,9 +38,9 @@ jobs:
           IdentityFile ~/.ssh/staging.key
         END
 
-    - name: Update agent copy of repo
-      run: |
-        ssh staging 'cd ${{ secrets.DOCKER_REMOTE_DIR }} && git pull'
+    # - name: Update agent copy of repo
+    #   run: |
+    #     ssh staging 'cd ${{ secrets.DOCKER_REMOTE_DIR }} && git pull'
 
     - name: Run remote docker chain
       run: |
