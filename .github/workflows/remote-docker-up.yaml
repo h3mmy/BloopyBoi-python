@@ -6,23 +6,13 @@ on:
   # Need to rewrite for reusability
   workflow_call:
     inputs:
-      username:
+      environment:
         required: true
         type: string
-      remoteDir:
-        required: true
-        type: string
-      remoteHost:
-        required: true
-        type: string
-    secrets:
-      envPAT:
-        required: true
-      remoteSshKey:
-        required: true
 
 jobs:
   deploy_to_server:
+    environment: ${{ inputs.environment }}
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -32,26 +22,26 @@ jobs:
       uses: actions/checkout@v2
       with:
         ref: main
-        token: ${{ secrets.envPAT }}
+        token: ${{ secrets.GITHUB_TOKEN }}
     # Copying files and artifacts via SSH
     - name: Configure SSH and create staging files
       run: |
         mkdir -p ~/.ssh
-        echo "${{ secrets.remoteSshKey }}" > ~/.ssh/staging.key
+        echo "${{ secrets.NEUTRINO_SSH_KEY }}" > ~/.ssh/staging.key
         chmod 600 ~/.ssh/staging.key
-        ssh-keyscan ${{ inputs.remoteHost }} | tee -a ~/.ssh/known_hosts
+        ssh-keyscan ${{ secrets.HOST_0_NAME }} | tee -a ~/.ssh/known_hosts
         echo "DISCORD_BOT_TOKEN=${{ secrets.DISCORD_BOT_TOKEN }}" > .env
         cat >>~/.ssh/config <<END
         Host staging
-          HostName ${{ inputs.remoteHost }}
-          User ${{ inputs.username }}
+          HostName ${{ secrets.HOST_0_NAME }}
+          User ${{ secrets.NEUTRINO_USER_NAME }}
           IdentityFile ~/.ssh/staging.key
         END
 
     - name: Update agent copy of repo
       run: |
-        ssh staging 'cd ${{ inputs.remoteDir }} && git pull'
+        ssh staging 'cd ${{ secrets.DOCKER_REMOTE_DIR }} && git pull'
 
     - name: Run remote docker chain
       run: |
-        sudo docker-compose -H ssh://${{ inputs.username }}@${{ inputs.remoteHost }}:${{ inputs.remoteDir }} up -d
+        sudo docker-compose -H ssh://${{ secrets.NEUTRINO_USER_NAME }}@${{ secrets.HOST_0_NAME }}:${{ secrets.DOCKER_REMOTE_DIR }} up -d
