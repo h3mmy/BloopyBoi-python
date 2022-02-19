@@ -1,4 +1,4 @@
-"""Unit Tests"""
+"""Unit Tests For Blissfest Cog"""
 import unittest
 from disnake.ext import commands
 
