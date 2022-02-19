@@ -15,13 +15,14 @@ on:
 
 jobs:
 
-  Run Unit Tests:
+  run-unit-tests:
     uses: h3mmy/bloopyboi/.github/workflows/python-app.yml@main
 
-  Build and Deploy Image:
+  build-and-deploy-image:
     uses: h3mmy/bloopyboi/.github/workflows/deploy-image.yaml@main
 
-  Deploy to Node:
+  deploy-to-node:
+    depends-on: build-and-deploy-image
     uses: h3mmy/bloopyboi/.github/workflows/remote-docker-up.yaml@main
     with:
       environment: quarkynet
