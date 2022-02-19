@@ -1,0 +1,57 @@
+name: Docker Compose Up (Remote)
+
+# Disabling this as host is now invalid
+on:
+  workflow_dispatch:
+  # Need to rewrite for reusability
+  workflow_call:
+    inputs:
+      username:
+        required: true
+        type: string
+      remoteDir:
+        required: true
+        type: string
+      remoteHost:
+        required: true
+        type: string
+    secrets:
+      envPAT:
+        required: true
+      remoteSshKey:
+        required: true
+
+jobs:
+  deploy_to_server:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checkout repo to runner
+    - name: Checkout Repo
+      uses: actions/checkout@v2
+      with:
+        ref: main
+        token: ${{ secrets.envPAT }}
+    # Copying files and artifacts via SSH
+    - name: Configure SSH and create staging files
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.remoteSshKey }}" > ~/.ssh/staging.key
+        chmod 600 ~/.ssh/staging.key
+        ssh-keyscan ${{ inputs.remoteHost }} | tee -a ~/.ssh/known_hosts
+        echo "DISCORD_BOT_TOKEN=${{ secrets.DISCORD_BOT_TOKEN }}" > .env
+        cat >>~/.ssh/config <<END
+        Host staging
+          HostName ${{ inputs.remoteHost }}
+          User ${{ inputs.username }}
+          IdentityFile ~/.ssh/staging.key
+        END
+
+    - name: Update agent copy of repo
+      run: |
+        ssh staging 'cd ${{ inputs.remoteDir }} && git pull'
+
+    - name: Run remote docker chain
+      run: |
+        sudo docker-compose -H ssh://${{ inputs.username }}@${{ inputs.remoteHost }}:${{ inputs.remoteDir }} up -d
