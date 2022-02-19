@@ -22,7 +22,6 @@ jobs:
     uses: h3mmy/bloopyboi/.github/workflows/deploy-image.yaml@main
 
   deploy-to-node:
-    depends-on: build-and-deploy-image
     uses: h3mmy/bloopyboi/.github/workflows/remote-docker-up.yaml@main
     with:
       environment: quarkynet
