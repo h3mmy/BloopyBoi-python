@@ -44,4 +44,4 @@ jobs:
 
     - name: Run remote docker chain
       run: |
-        sudo docker-compose -H ssh://${{ secrets.NEUTRINO_USER_NAME }}@${{ secrets.HOST_0_NAME }}:${{ secrets.DOCKER_REMOTE_DIR }} up -d
+        sudo docker-compose -H ssh://${{ secrets.NEUTRINO_USER_NAME }}@${{ secrets.HOST_0_NAME }} -f ${{ secrets.DOCKER_REMOTE_DIR }}/docker-compose.yaml up -d
