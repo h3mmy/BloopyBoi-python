@@ -1,13 +1,15 @@
 name: Docker Compose Up (Remote)
 
-# Disabling this as host is now invalid
 on:
   workflow_dispatch:
-  # Need to rewrite for reusability
+  # TEST ONLY
+  push:
+    paths:
+      - './.github/workflows/remote-docker-up.yaml'
   workflow_call:
     inputs:
       environment:
-        required: true
+        required: false
         type: string
 
 jobs:
@@ -15,7 +17,6 @@ jobs:
     environment: ${{ inputs.environment }}
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
     steps:
     # Checkout repo to runner
     - name: Checkout Repo
@@ -37,11 +38,14 @@ jobs:
           User ${{ secrets.NEUTRINO_USER_NAME }}
           IdentityFile ~/.ssh/staging.key
         END
-
-    # - name: Update agent copy of repo
-    #   run: |
-    #     ssh staging 'cd ${{ secrets.DOCKER_REMOTE_DIR }} && git pull'
-
-    - name: Run remote docker chain
+    # This is optional with the latest tag
+    - name: Update agent copy of repo
       run: |
-        sudo docker-compose -H ssh://${{ secrets.NEUTRINO_USER_NAME }}@${{ secrets.HOST_0_NAME }} up -d
+        ssh staging 'cd ${{ secrets.DOCKER_REMOTE_DIR }} && git pull'
+    # Couldn't get -H to work properly
+    - name: Docker Compose Up
+      run: |
+        ssh staging 'cd ${{ secrets.DOCKER_REMOTE_DIR }} && sudo docker-compose up -d'
+    # - name: Run remote docker chain
+    #   run: |
+    #     sudo docker-compose -H ssh://${{ secrets.NEUTRINO_USER_NAME }}@${{ secrets.HOST_0_NAME }} up -d
