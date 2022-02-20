@@ -8,8 +8,6 @@ env/*
 .vscode/*
 .direnv/*
 
-# Files in progress
-inspire_test.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -2,8 +2,7 @@
 import unittest
 from disnake.ext import commands
 
-import blissfest
-
+import blissfest           # pylint: disable=import-error
 
 class BlissfestCommandTest(unittest.TestCase):
     """Unit Tests"""

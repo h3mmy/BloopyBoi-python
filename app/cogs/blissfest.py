@@ -22,16 +22,17 @@ class BlissfestCommand(commands.Cog):
 
     @commands.command()
     async def bliss(self, ctx: commands.Context):
+        # pylint: disable=no-self-use
         """Returns days left to BLISSFEST_DATE"""
         days_left = BLISSFEST_DATE-date.today()
-        msg = self.build_countdown_msg(days_left)
+        msg = build_countdown_msg(days_left)
         await ctx.send(embed=msg)
 
-    def build_countdown_msg(self, days_left):
-        """Builds the embedded countdown message"""
-        return disnake.Embed(
-            title="🏕 Blissfest! 🎶🎼",
-            description=f"Only {days_left.days} Days Left!")
+def build_countdown_msg(days_left):
+    """Builds the embedded countdown message"""
+    return disnake.Embed(
+        title="🎶🎼 Blissfest! 🏕",
+        description=f"🎷Only {days_left.days} Days Left!🎺🍄")
 
 def setup(bot: commands.Bot):
     """Sets up Cog"""
