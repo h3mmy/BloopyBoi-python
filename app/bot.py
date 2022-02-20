@@ -4,11 +4,11 @@ import disnake
 
 from disnake.ext import commands
 
-description = '''The BloopyBoi, one of bloop.'''
+DESCRIPTION = '''The BloopyBoi, one of bloop.'''
 
 intents = disnake.Intents.default()
 
-bot = commands.Bot(command_prefix='!', description=description, intents=intents)
+bot = commands.Bot(command_prefix='!', description=DESCRIPTION, intents=intents)
 
 @bot.event
 async def on_ready():
