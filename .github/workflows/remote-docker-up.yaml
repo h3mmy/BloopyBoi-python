@@ -3,9 +3,9 @@ name: Docker Compose Up (Remote)
 on:
   workflow_dispatch:
   # TEST ONLY
-  push:
-    paths:
-      - './.github/workflows/remote-docker-up.yaml'
+  #push:
+  #  paths:
+  #    - './.github/workflows/remote-docker-up.yaml'
   workflow_call:
     inputs:
       environment:
