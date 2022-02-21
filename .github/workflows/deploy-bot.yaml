@@ -13,17 +13,20 @@ on:
       - './Dockerfile'
       - './docker-compose.yml'
 
+env:
+  environment: quarkynet
+
 jobs:
 
   run-unit-tests:
-    uses: ${{ github.repository_owner }}/bloopyboi/.github/workflows/python-app.yml@main
+    uses: ${{ github.repository }}/.github/workflows/python-app.yml@main
 
   build-and-deploy-image:
     needs: run-unit-tests
-    uses: ${{ github.repository_owner }}/bloopyboi/.github/workflows/deploy-image.yaml@main
+    uses: ${{ github.repository }}/.github/workflows/deploy-image.yaml@main
 
   deployment:
     needs: build-and-deploy-image
     uses: ${{ github.repository_owner }}/bloopyboi/.github/workflows/remote-docker-up.yaml@main
     with:
-      environment: quarkynet
+      environment: ${{ env.environment }}
