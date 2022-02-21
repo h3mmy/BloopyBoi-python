@@ -26,7 +26,12 @@ jobs:
     uses: ./.github/workflows/deploy-image.yaml
 
   deployment:
+    environment: ${{ env.environment }}
     needs: build-and-deploy-image
     uses: ./.github/workflows/remote-docker-up.yaml
     with:
-      environment: ${{ env.environment }}
+      sshKey: ${{ secrets.NEUTRINO_SSH_KEY }}
+      remoteHost: ${{ secrets.HOST_0_NAME }}
+      remoteUser: ${{ secrets.NEUTRINO_USER_NAME }}
+      remoteDir: ${{ secrets.DOCKER_REMOTE_DIR }}
+      discordBotToken: ${{ secrets.DISCORD_BOT_TOKEN }}
