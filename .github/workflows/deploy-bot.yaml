@@ -13,9 +13,6 @@ on:
       - './Dockerfile'
       - './docker-compose.yml'
 
-env:
-  environment: quarkynet
-
 jobs:
 
   run-unit-tests:
@@ -26,7 +23,7 @@ jobs:
     uses: ./.github/workflows/deploy-image.yaml
 
   deployment:
-    environment: ${{ env.environment }}
+    environment: quarkynet
     needs: build-and-deploy-image
     uses: ./.github/workflows/remote-docker-up.yaml
     with:
