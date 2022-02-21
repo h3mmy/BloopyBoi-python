@@ -6,6 +6,9 @@ on:
   #push:
   #  paths:
   #    - './.github/workflows/remote-docker-up.yaml'
+  # release:
+  #   types:
+  #     - published
   workflow_call:
     inputs:
       environment:
