@@ -25,6 +25,7 @@ jobs:
   deployment:
     environment: quarkynet
     needs: build-and-deploy-image
+    runs-on: ubuntu-latest
     steps:
       - uses: ./.github/workflows/remote-docker-up.yaml
         with:
