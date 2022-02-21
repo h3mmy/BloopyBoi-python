@@ -19,14 +19,14 @@ env:
 jobs:
 
   run-unit-tests:
-    uses: ./.github/workflows/python-app.yml@main
+    uses: ./.github/workflows/python-app.yml
 
   build-and-deploy-image:
     needs: run-unit-tests
-    uses: ./.github/workflows/deploy-image.yaml@main
+    uses: ./.github/workflows/deploy-image.yaml
 
   deployment:
     needs: build-and-deploy-image
-    uses: ./.github/workflows/remote-docker-up.yaml@main
+    uses: ./.github/workflows/remote-docker-up.yaml
     with:
       environment: ${{ env.environment }}
