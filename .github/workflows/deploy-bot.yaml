@@ -27,6 +27,7 @@ jobs:
     uses: ./.github/workflows/remote-docker-up.yaml
     with:
       environment: quarkynet
+    secrets:
       envPAT: ${{ secrets.envPAT }}
       sshKey: ${{ secrets.NEUTRINO_SSH_KEY }}
       remoteHost: ${{ secrets.HOST_0_NAME }}
