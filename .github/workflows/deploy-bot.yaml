@@ -23,15 +23,13 @@ jobs:
     uses: ./.github/workflows/deploy-image.yaml
 
   deployment:
-    environment: quarkynet
     needs: build-and-deploy-image
-    runs-on: ubuntu-latest
-    steps:
-      - uses: ./.github/workflows/remote-docker-up.yaml
-        with:
-          envPAT: ${{ secrets.envPAT }}
-          sshKey: ${{ secrets.NEUTRINO_SSH_KEY }}
-          remoteHost: ${{ secrets.HOST_0_NAME }}
-          remoteUser: ${{ secrets.NEUTRINO_USER_NAME }}
-          remoteDir: ${{ secrets.DOCKER_REMOTE_DIR }}
-          discordBotToken: ${{ secrets.DISCORD_BOT_TOKEN }}
+    uses: ./.github/workflows/remote-docker-up.yaml
+    with:
+      environment: quarkynet
+      envPAT: ${{ secrets.envPAT }}
+      sshKey: ${{ secrets.NEUTRINO_SSH_KEY }}
+      remoteHost: ${{ secrets.HOST_0_NAME }}
+      remoteUser: ${{ secrets.NEUTRINO_USER_NAME }}
+      remoteDir: ${{ secrets.DOCKER_REMOTE_DIR }}
+      discordBotToken: ${{ secrets.DISCORD_BOT_TOKEN }}
