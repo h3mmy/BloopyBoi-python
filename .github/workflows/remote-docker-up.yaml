@@ -61,6 +61,9 @@ jobs:
       - name: Update agent copy of repo
         run: |
           ssh staging 'cd ${{ secrets.remoteDir }} && git pull'
+      - name: Pull new image
+        run: |
+          ssh staging 'cd ${{ secrets.remoteDir }} && sudo docker-compose pull'
       # Couldn't get -H to work properly
       - name: Docker Compose Up
         run: |

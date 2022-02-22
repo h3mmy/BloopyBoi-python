@@ -21,6 +21,9 @@ jobs:
   build-and-deploy-image:
     needs: run-unit-tests
     uses: ./.github/workflows/deploy-image.yaml
+    with:
+      imageName: bloopyboi
+      registry: ghcr.io
 
   deployment:
     needs: build-and-deploy-image

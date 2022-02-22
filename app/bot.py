@@ -23,5 +23,6 @@ async def hello(ctx):
 
 bot.load_extension("cogs.inspire")
 bot.load_extension("cogs.blissfest")
+bot.load_extension("cogs.utilities")
 
 bot.run(os.getenv('DISCORD_BOT_TOKEN'))

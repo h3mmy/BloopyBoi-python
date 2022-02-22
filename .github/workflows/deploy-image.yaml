@@ -5,6 +5,19 @@ name: Deploy BloopyBoi to GHCR
 on:
   workflow_dispatch:
   workflow_call:
+    inputs:
+      registry:
+        required: false
+        default: ghcr.io
+        description: 'Registry to use for container image'
+      dockerfile_path:
+        required: false
+        default: ./Dockerfile
+        description: 'Path to Dockerfile if not root dir'
+      imageName:
+        required: false
+        default: ${{ github.repository }}
+        description: 'Name that image should have'
   release:
     types:
       - published
@@ -15,22 +28,43 @@ env:
   dockerfile_path: ./Dockerfile
 
 jobs:
-  Deploy:
+  compute-tag:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
+
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
         with:
           registry: ${{ env.registry }}
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get old tag number
+        id: get-tag
+        run: |
+          echo:: set-output last-tag=$(git describe --tags --abbrev=0)
+
+
+  Deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ env.registry }}
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v2
         with:
           file: ${{ env.dockerfile_path }}
-          push: true # Will only build if this is not here
+          push: true # Will only build (vs buildAndPush) if this is not here
           tags: |
             ghcr.io/${{ github.repository_owner }}/${{ env.imageName }}:${{ github.sha }}
             ghcr.io/${{ github.repository_owner }}/${{ env.imageName }}:latest
