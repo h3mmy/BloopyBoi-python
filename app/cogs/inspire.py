@@ -24,7 +24,7 @@ def do_get_inspiro(api_url):
     """Do a GET to fetch link"""
     res = requests.get(api_url)
     if res.status_code == 200:
-        return res.text()
+        return res.text
     return BACKUP_LINK
 
 def setup(bot: commands.Bot):

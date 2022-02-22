@@ -16,10 +16,7 @@ def mocked_requests_get(*args):
             """Creates MockResponse"""
             self.string_data = string_data
             self.status_code = status_code
-
-        def text(self):
-            """Returns text"""
-            return self.string_data
+            self.text = self.string_data
 
         def status(self):
             """Returns Status Code"""

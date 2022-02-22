@@ -47,7 +47,7 @@ jobs:
       - name: Get old tag number
         id: get-tag
         run: |
-          echo:: set-output last-tag=$(git describe --tags --abbrev=0)
+          echo:: set-output name=last-tag::$(git describe --tags --abbrev=0)
 
 
   Deploy:

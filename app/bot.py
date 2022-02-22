@@ -21,6 +21,11 @@ async def hello(ctx):
     if ctx:
         await ctx.send('Hello to you as well humanoid! This is an experiment.')
 
+@commands.slash_command()
+async def wink(inter):
+    """Does a wink"""
+    await inter.response.send_message("winked")
+
 bot.load_extension("cogs.inspire")
 bot.load_extension("cogs.blissfest")
 bot.load_extension("cogs.utilities")

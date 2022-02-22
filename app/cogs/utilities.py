@@ -9,12 +9,6 @@ class UtilityCommand(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
 
-    @commands.slash_command()
-    async def wink(self, inter):
-        """Does a wink"""
-        # pylint   disable=no-self-use
-        await inter.response.send_message("winked")
-
     @commands.command()
     @commands.is_owner()
     async def check(self, ctx: commands.Context):
