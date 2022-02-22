@@ -1,8 +1,10 @@
-"""Module docstring"""
+"""Bot Module"""
 import os
 import disnake
 
 from disnake.ext import commands
+
+from .cogs.greetings import Greetings
 
 DESCRIPTION = '''The BloopyBoi, one of bloop.'''
 
@@ -26,8 +28,8 @@ async def wink(inter):
     """Does a wink"""
     await inter.response.send_message("winked")
 
-bot.add_cog("InspireCommand")
+bot.load_extension("cogs.inspire")
 bot.load_extension("cogs.blissfest")
-bot.add_cog("Greetings")
+bot.add_cog(Greetings(bot))
 
 bot.run(os.getenv('DISCORD_BOT_TOKEN'))

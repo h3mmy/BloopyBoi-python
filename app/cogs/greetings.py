@@ -3,7 +3,7 @@
 import disnake
 from disnake.ext import commands
 
-class Greetings(commands.Cog):
+class Greetings(commands.Cog, name='Greetings'):
     """Cog for handling Greetings"""
     def __init__(self, bot):
         self.bot = bot
