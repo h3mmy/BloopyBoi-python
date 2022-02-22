@@ -28,7 +28,6 @@ jobs:
   deployment:
     needs: build-and-deploy-image
     uses: ./.github/workflows/remote-docker-up.yaml
-    environment: quarkynet
     secrets:
       envPAT: ${{ secrets.envPAT }}
       sshKey: ${{ secrets.NEUTRINO_SSH_KEY }}
