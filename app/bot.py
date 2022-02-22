@@ -26,8 +26,8 @@ async def wink(inter):
     """Does a wink"""
     await inter.response.send_message("winked")
 
-bot.load_extension("cogs.inspire")
+bot.add_cog("InspireCommand")
 bot.load_extension("cogs.blissfest")
-bot.load_extension("cogs.utilities")
+bot.add_cog("Greetings")
 
 bot.run(os.getenv('DISCORD_BOT_TOKEN'))
