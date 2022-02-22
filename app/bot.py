@@ -1,10 +1,9 @@
 """Bot Module"""
 import os
+import sys
 import disnake
 
 from disnake.ext import commands
-
-from .cogs.greetings import Greetings
 
 DESCRIPTION = '''The BloopyBoi, one of bloop.'''
 
@@ -30,6 +29,10 @@ async def wink(inter):
 
 bot.load_extension("cogs.inspire")
 bot.load_extension("cogs.blissfest")
-bot.add_cog(Greetings(bot))
-
+# bot.add_cog(Greetings(bot))
 bot.run(os.getenv('DISCORD_BOT_TOKEN'))
+# def __main__():
+#     bot.run(os.getenv('DISCORD_BOT_TOKEN'))
+
+# if __name__ == "__main__":
+#     sys.exit(__main__())  # pragma: no cover

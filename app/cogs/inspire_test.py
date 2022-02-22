@@ -3,7 +3,7 @@ import unittest
 from unittest import mock
 from disnake.ext import commands
 
-import inspire     # pylint: disable=import-error
+from . import inspire
 
 MOCK_API_URL="http://api.url/mock.json"
 MOCK_RETURN_LINK="http://mock_link"

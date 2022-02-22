@@ -2,7 +2,7 @@
 import unittest
 from disnake.ext import commands
 
-from greetings import Greetings  # pylint: disable=import-error
+from app.cogs.greetings import Greetings
 
 class GreetingsTest(unittest.TestCase):
     """Unit Tests"""
