@@ -8,10 +8,10 @@ on:
     branches:
       - main
     paths:
-      - './app/*'
-      - './requirements.txt'
-      - './Dockerfile'
-      - './docker-compose.yml'
+      - 'app/*'
+      - 'requirements.txt'
+      - 'Dockerfile'
+      - 'docker-compose.yml'
 
 jobs:
 
