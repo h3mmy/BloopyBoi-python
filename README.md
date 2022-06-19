@@ -9,3 +9,5 @@
 
 
 -- Rewriting in Go??
+
+Go rewrite+ available [here](https://gitlab.com/h3mmy/bloopyboi)
